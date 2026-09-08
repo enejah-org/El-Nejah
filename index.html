@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="الموقع الرسمي لقرية النجاح (بلدية الدفعة - مقاطعة الطينطان) | Official website for Al-Najah Village, Mauritania.">
+  <title>قرية النجاح</title>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #166534;
+      --green-dark: #114a26;
+      --gold: #d4af37;
+      --ink: #1e3326;
+      --muted: #4b6153;
+      --line: #dfe9e2;
+      --soft: #f4f8f5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+    body {
+      font-family: "Tajawal", Tahoma, sans-serif;
+      color: var(--ink);
+      background: #fff;
+      line-height: 1.9;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.97);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo::before {
+      content: "";
+      width: 11px;
+      height: 11px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      border-radius: 2px;
+    }
+
+    .nav-links { display: flex; gap: 26px; }
+
+    .nav-links a {
+      font-weight: 500;
+      color: var(--muted);
+      padding: 6px 2px;
+      position: relative;
+      transition: color 0.25s;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 2px;
+      background: var(--green);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--green); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px 4px;
+    }
+
+    .nav-toggle span {
+      width: 22px;
+      height: 2px;
+      background: var(--green);
+      border-radius: 2px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #14532d, #1c703d);
+      text-align: center;
+      padding: 96px 0 84px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1.4px);
+      background-size: 22px 22px;
+    }
+
+    .hero h1 {
+      position: relative;
+      color: #fff;
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      font-weight: 800;
+    }
+
+    .hero h1::after {
+      content: "";
+      display: block;
+      width: 70px;
+      height: 3px;
+      background: var(--gold);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+
+    section { padding: 72px 0; }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--green);
+      margin-bottom: 40px;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    .about-body { max-width: 760px; margin: 0 auto; }
+
+    .about-body p {
+      background: var(--soft);
+      border-right: 4px solid var(--gold);
+      border-radius: 10px;
+      padding: 20px 24px;
+      color: var(--muted);
+    }
+
+    .about-body p + p { margin-top: 16px; }
+
+    #videos { background: var(--soft); }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 190px;
+      gap: 14px;
+    }
+
+    .gallery figure {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: repeating-linear-gradient(45deg, #eef3ef 0 14px, #e3ece6 14px 28px);
+    }
+
+    .gallery figure:first-child {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .gallery img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    .gallery img.empty { visibility: hidden; }
+    .gallery figure:hover img { transform: scale(1.05); }
+
+    .videos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    .video {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border: 1.5px dashed #b9d2c0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: repeating-linear-gradient(45deg, #eef3ef 0 14px, #e3ece6 14px 28px);
+    }
+
+    .video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video iframe[hidden] { display: none; }
+
+    .contact-form {
+      max-width: 580px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 34px;
+      box-shadow: 0 10px 30px rgba(17, 74, 38, 0.07);
+    }
+
+    .field { margin-bottom: 18px; }
+
+    .field label {
+      display: block;
+      font-weight: 700;
+      color: #22432e;
+      margin-bottom: 7px;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #d8e3db;
+      border-radius: 10px;
+      font: inherit;
+      background: #fbfdfc;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(22, 101, 52, 0.12);
+    }
+
+    .field textarea { resize: vertical; min-height: 140px; }
+
+    .btn {
+      display: block;
+      margin: 6px auto 0;
+      padding: 13px 46px;
+      background: var(--green);
+      color: #fff;
+      font: inherit;
+      font-weight: 700;
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+    }
+
+    .btn:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+    .site-footer {
+      background: #123f23;
+      color: #d9e7dd;
+      text-align: center;
+      padding: 44px 0 28px;
+    }
+
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .social a {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+    }
+
+    .social a:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #123f23;
+    }
+
+    .social svg { width: 20px; height: 20px; fill: currentColor; }
+
+    .site-footer p { font-size: 0.95rem; color: #b3cdbd; }
+
+    @media (max-width: 720px) {
+      .nav-toggle { display: flex; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        right: 0;
+        left: 0;
+        background: #fff;
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 20px 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-links li { border-top: 1px solid #eef3f0; }
+      .nav-links a { display: block; padding: 12px 0; }
+
+      .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+      .contact-form { padding: 26px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#home">قرية النجاح</a>
+      <button class="nav-toggle" aria-label="القائمة"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
+        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="#about">عن القرية</a></li>
+        <li><a href="#gallery">معرض الصور</a></li>
+        <li><a href="#videos">الفيديوهات</a></li>
+        <li><a href="#contact">تواصل معنا</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="hero" id="home">
+    <h1>قرية النجاح</h1>
+  </div>
+
+  <main>
+
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">عن القرية</h2>
+        <div class="about-body">
+          <p>قرية النجاح هي إحدى القرى العريقة الواقعة في قلب بلدية الدفعة التابعة لمقاطعة الطينطان بولاية الحوض الغربي في الجنوب الشرقي الموريتاني. يعود تاريخ تأسيس القرية إلى الثامن من أغسطس عام 1974م، حيث وضع أهالي القرية الأوائل نواة هذا المجتمع القائم على التآخي والتعاون. تمتد القرية على رقعة جغرافية تتميز بطبيعتها المعطاءة وموقعها الذي يربط بين السطح السهلي والمناظر الطبيعية الخلابة للولاية. وعلى مدار عقود من الزمن، حافظت النجاح على هويتها الاجتماعية والثقافية التي تتوارثها الأجيال، مع حرص أبنائها المستمر على تطوير بنيتها واستقرار أسرها. تشكل القرية اليوم نموذجاً حياً للقرى الموريتانية التي تجمع بين الأصالة والسكينة، وتظل أبوابها ممدودة لكل زائر يبحث عن الهدوء والتعرف على تاريخها المجيد وموقعها المتميز في الحوض الغربي.</p>
+          <p>مع تباشير موسم الأمطار من كل عام، تتصدر قرية النجاح المشهد الطبيعي في بلدية الدفعة، حيث تلبس أراضيها رداءً أخضراً ممتداً يرسم لوحة خريفية جذابة. وتشهد المنطقة خلال هذه الفترة توافداً للأهالي والزوار للاستمتاع بجريان الشعاب واعتدال درجات الحرارة، في أجواء ريفية تعكس خيرات الأرض وبركة الغيث. ولا يقتصر هذا الرونق على أسابيع الخريف فحسب، بل يمتد أثره إلى فصل الربيع الذي يتسم بهواء عليل وغطاء نباتي يخدم المواشي ويمنح القرية طابعاً استثنائياً يجمع بين السكينة وجمال الطبيعة الموريتانية الأصيلة.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="container">
+        <h2 class="section-title">معرض الصور</h2>
+        <div class="gallery">
+          <figure><img src="images/1.webp" alt="من قرية النجاح — صورة 1"></figure>
+          <figure><img src="images/2.webp" alt="من قرية النجاح — صورة 2"></figure>
+          <figure><img src="images/3.webp" alt="من قرية النجاح — صورة 3"></figure>
+          <figure><img src="images/4.webp" alt="من قرية النجاح — صورة 4"></figure>
+          <figure><img src="images/5.webp" alt="من قرية النجاح — صورة 5"></figure>
+        </div>
+      </div>
+    </section>
+
+<section id="videos">
+  <div class="container">
+    <h2 class="section-title">فيديوهات القرية</h2>
+    <div class="videos">
+      <div class="video">
+        <iframe 
+          title="فيديو قرية النجاح — 1" 
+          src="https://youtube.com/shorts/BFteoeFqfRg?si=KUdoaxX-yQ8IoAkY" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="video">
+        <iframe 
+          title="فيديو قرية النجاح — 2" 
+          src="https://youtube.com/shorts/HI8pbpTmJYk?si=hZ5CZwQ0Pf_SoNSo" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="video">
+        <iframe 
+          title="فيديو قرية النجاح — 3" 
+          src="https://youtube.com/shorts/8lDB9PSYBjE?si=DUFLeb-nkZ3HuLtb" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">تواصل معنا</h2>
+        <form class="contact-form" action="https://formsubmit.co/enejah.org@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="رسالة جديدة من موقع قرية النجاح">
+          <input type="text" name="_honey" style="display:none">
+          <div class="field">
+            <label for="name">الاسم الكامل</label>
+            <input type="text" id="name" name="الاسم" required>
+          </div>
+          <div class="field">
+            <label for="email">البريد الإلكتروني</label>
+            <input type="email" id="email" name="البريد الإلكتروني" required>
+          </div>
+          <div class="field">
+            <label for="message">الرسالة</label>
+            <textarea id="message" name="الرسالة" required></textarea>
+          </div>
+          <button class="btn" type="submit">إرسال</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="social">
+        <a href="https://www.facebook.com/share/1992Nr8tUZ/" aria-label="فيسبوك">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://vm.tiktok.com/ZS9SMMjGBS6Q6-RpK4a/" aria-label="تيك توك">
+          <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </a>
+        <a href="https://youtube.com/@el-nejah?si=8K-rsU7UJ782y0JW" aria-label="يوتيوب">
+          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+      </div>
+      <p>قرية النجاح &copy; <span id="year"></span> — جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+
+    toggle.addEventListener('click', function () {
+      links.classList.toggle('open');
+    });
+
+    links.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        links.classList.remove('open');
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.querySelectorAll('.gallery img').forEach(function (img) {
+      function markEmpty() { img.classList.add('empty'); }
+      if (img.complete && img.naturalWidth === 0) markEmpty();
+      else img.addEventListener('error', markEmpty, { once: true });
+    });
+
+    document.querySelectorAll('.video iframe').forEach(function (frame) {
+      if (!frame.getAttribute('src')) frame.hidden = true;
+    });
+  </script>
+
+</body>
+</html>
